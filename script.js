@@ -21,11 +21,20 @@ function updateStatus(text) {
   statusEl.textContent = text;
 }
 
+function setEndState(type) {
+  statusEl.classList.remove('win', 'draw');
+  resetBtn.classList.remove('attention');
+  if (type) {
+    statusEl.classList.add(type);
+    resetBtn.classList.add('attention');
+  }
+}
+
 function checkWinner() {
   for (const combo of winningCombos) {
     const [a, b, c] = combo;
     if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-      return board[a];
+      return combo;
     }
   }
   return null;
@@ -37,18 +46,22 @@ function handleCellClick(e) {
 
   board[index] = currentPlayer;
   e.currentTarget.textContent = currentPlayer;
+  e.currentTarget.classList.add(currentPlayer === 'X' ? 'x' : 'o');
   e.currentTarget.disabled = true;
 
-  const winner = checkWinner();
-  if (winner) {
+  const winnerCombo = checkWinner();
+  if (winnerCombo) {
     gameOver = true;
-    updateStatus(`Player ${winner} wins!`);
+    winnerCombo.forEach((i) => cells[i].classList.add('winner'));
+    updateStatus(`Player ${currentPlayer} wins!`);
+    setEndState('win');
     return;
   }
 
   if (!board.includes('')) {
     gameOver = true;
     updateStatus('Draw game.');
+    setEndState('draw');
     return;
   }
 
@@ -63,7 +76,9 @@ function resetGame() {
   cells.forEach((cell) => {
     cell.textContent = '';
     cell.disabled = false;
+    cell.classList.remove('x', 'o', 'winner');
   });
+  setEndState(null);
   updateStatus("Player X's turn");
 }
 
