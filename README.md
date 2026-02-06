@@ -1,1 +1,11 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/BCrizr4d)
+# Tic Tac Toe
+
+## Run Locally
+1. Clone this repository.
+2. Open `index.html` in any modern browser.
+
+## GitHub Pages
+`https://alexandralheureuxece.github.io/lab-1-msabetih/`
+
+## LLM Tools Used
+- Codex (GPT-5 coding agent)
